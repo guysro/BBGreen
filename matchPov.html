@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>BBYarok</title>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/webcam-easy@1.1.1/dist/webcam-easy.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="style"
+    />
+  </head>
+  <body>
+    <video
+      id="webcam"
+      autoplay
+      playsinline
+      class="video"
+    ></video>
+    <canvas id="canvas"></canvas>
+    <div id="timer"></div>
+    <script>
+      const timer = document.querySelector("#timer");
+      timer.style.backgroundImage = "url('timerBanner')";
+      const camElm = document.querySelector("#webcam");
+      const canvasElm = document.querySelector("#canvas");
+      const camera = new Webcam(camElm, "stream", canvasElm);
+      camera.start();
+      let games = [];
+
+      const activateTimer = () => {
+        fetch("runBanner")
+          .then((res) => res.text())
+          .then((res) => {
+            timer.innerHTML = res;
+          });
+      };
+
+      async function checkGames() {
+        let text = "";
+        let response = await fetch("getGames");
+        text = await response.text();
+        console.log(text);
+        gamesCont.innerHTML = text;
+      }
+      activateTimer();
+      let x = setInterval(function () {
+        activateTimer();
+      }, 1000);
+      setInterval(() => {
+        fetch("getGames");
+        fetch("getInMatch")
+          .then((res) => res.text())
+          .then((res) => {
+            if (res == "false") {
+              window.location.replace("/noMatch");
+            }
+          });
+      }, 1000);
+    </script>
+  </body>
+</html>

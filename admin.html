@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="style"
+    />
+    <style>
+      body {
+        display: flex;
+        gap: 20px;
+        background-color: white !important;
+      }
+    </style>
+    <title>admin</title>
+  </head>
+  <body>
+    <div>
+      <label for="gameToStart">game to start</label>
+      <input
+        type="text"
+        name="gameNum"
+        id="gameToStart"
+      />
+      <button onclick="startGame()">start game</button>
+    </div>
+    <button onclick="startTime()">start timer</button>
+    <button onclick="endGame()">end game</button>
+    <button onclick="resetTime()">reset timer</button>
+    <div
+      id="gameCont"
+      class="gameSubCont"
+    >
+      <div>
+        <label for="num">match num</label>
+        <input
+          type="number"
+          name="matchNum"
+          id="num"
+          class="numIn"
+        />
+      </div>
+      <div>
+        <label for="redWin">top won?</label>
+        <input
+          type="radio"
+          name="winner"
+          id="redWin"
+        />
+      </div>
+      <div>
+        <label for="blueWin">bottom won?</label>
+        <input
+          type="radio"
+          name="winner"
+          id="blueWin"
+        />
+      </div>
+      <button
+        id="submit"
+        onclick="submitGame()"
+      >
+        submit game
+      </button>
+    </div>
+    <script>
+      const resetTime = () => {
+        fetch("resetTimer");
+      };
+      const endGame = async () => {
+        resetTime();
+        fetch("stopMatch");
+      };
+      const gameToStartInput = document.querySelector("#gameToStart");
+      const startGame = () => {
+        if (gameToStartInput.value == "") {
+          alert("no match number");
+          return;
+        }
+        let bodyReq = {
+          "gameNum": gameToStartInput.value
+        };
+        fetch("startGame", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(bodyReq)
+        });
+      };
+      const startTime = () => {
+        fetch("startTimer");
+      };
+      const numInput = document.querySelector("#num");
+      const blueInput = document.querySelector("#blueWin");
+      const redInput = document.querySelector("#redWin");
+      const submitGame = () => {
+        console.log("num: ", numInput.value);
+        console.log("blue: ", blueInput.checked);
+        console.log("red: ", redInput.checked);
+
+        const bodyReq = {
+          number: numInput.value,
+          winner: blueInput.checked ? "blue" : "red"
+        };
+        console.log("body:", bodyReq);
+        fetch("submitGame", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(bodyReq)
+        });
+      };
+    </script>
+  </body>
+</html>

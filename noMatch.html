@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>BBYarok</title>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/webcam-easy@1.1.1/dist/webcam-easy.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="noMatchStyle"
+    />
+  </head>
+  <body>
+    <div class="connectFirst l1">
+      <div class="line l21"></div>
+      <div class="vline l22"></div>
+      <div class="line l23"></div>
+    </div>
+    <div class="connectFirst l2">
+      <div class="line l21"></div>
+      <div class="vline l22"></div>
+      <div class="line l23"></div>
+    </div>
+    <div class="connectFirst l3">
+      <div class="line"></div>
+    </div>
+    <div class="connectFirst l4">
+      <div class="line"></div>
+    </div>
+    <div class="connectSec l5">
+      <div class="line l21"></div>
+      <div class="vline l22"></div>
+      <div class="line l23"></div>
+    </div>
+    <div class="connectSec l6">
+      <div class="line l21"></div>
+      <div class="vline l22"></div>
+      <div class="line l23"></div>
+    </div>
+    <div class="connectThird">
+      <div class="line l31"></div>
+      <div class="vline l22"></div>
+      <div class="line l33"></div>
+    </div>
+    <div class="connectFourth">
+      <div class="line l21"></div>
+      <div class="vline l22"></div>
+    </div>
+
+    <div
+      class="games"
+      id="games"
+    ></div>
+    <script>
+      const gamesCont = document.querySelector("#games");
+
+      let games = [];
+      games.toString().replaceAll(",", " ");
+      async function checkGames() {
+        let response = await fetch("getGames");
+        games = await response.json();
+
+        console.log(games.toString().replaceAll(",", " "));
+        gamesCont.innerHTML = games.toString().replaceAll(",", " ");
+      }
+      checkGames();
+      setInterval(async () => {
+        await checkGames();
+      }, 5000);
+
+      setInterval(() => {
+        fetch("getInMatch")
+          .then((res) => res.text())
+          .then((res) => {
+            if (res == "true") {
+              window.location.replace("/");
+            }
+          });
+      }, 1000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>BBYarok</title>
+  </head>
+  <body>
+    <script>
+      const body = document.querySelector("body");
+      const head = document.querySelector("head");
+      setInterval(async () => {
+        let headG = await fetch("getHead");
+        headG = await headG.text();
+        head.innerHTML = await headG;
+
+        let bodyG = await fetch("getBody");
+        bodyG = await bodyG.text();
+        body.innerHTML = await bodyG;
+      }, 1000);
+    </script>
+  </body>
+</html>
