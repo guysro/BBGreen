@@ -1,16 +1,14 @@
 [
-  { "number": 1, "winner": "", "loser": "", "red": "sroka", "blue": "bayom" },
-  { "number": 2, "winner": "", "loser": "", "red": "rev", "blue": "yaya" },
+  { "number": 1, "winner": "sroka", "loser": "", "red": "sroka", "blue": "phold" },
+  { "number": 2, "winner": "rev", "loser": "bayom", "red": "rev", "blue": "bayom" },
   { "number": 3, "winner": "", "loser": "", "red": "yoav", "blue": "yuval" },
-  { "number": 4, "winner": "", "loser": "", "red": "tomer", "blue": "benoss" },
-  { "number": 5, "winner": "", "loser": "", "red": "", "blue": "" },
+  { "number": 4, "winner": "boss", "loser": "", "red": "boss", "blue": "phold" },
+  { "number": 5, "winner": "", "loser": "", "red": "", "blue": "bayom" },
   { "number": 6, "winner": "", "loser": "", "red": "", "blue": "" },
-  { "number": 7, "winner": "", "loser": "", "red": "", "blue": "" },
-  { "number": 8, "winner": "", "loser": "", "red": "", "blue": "" },
+  { "number": 7, "winner": "", "loser": "", "red": "sroka", "blue": "rev" },
+  { "number": 8, "winner": "", "loser": "", "red": "", "blue": "boss" },
   { "number": 9, "winner": "", "loser": "", "red": "", "blue": "" },
   { "number": 10, "winner": "", "loser": "", "red": "", "blue": "" },
   { "number": 11, "winner": "", "loser": "", "red": "", "blue": "" },
-  { "number": 12, "winner": "", "loser": "", "red": "", "blue": "" },
-  { "number": 13, "winner": "", "loser": "", "red": "", "blue": "" },
   { "number": "F", "winner": "", "loser": "", "red": "", "blue": "" }
 ]

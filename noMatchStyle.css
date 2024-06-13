@@ -40,7 +40,7 @@
 .gameWinner {
   width: 100%;
   height: 3vh;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   display: flex;
   align-items: center;
   text-indent: 1vw;
@@ -67,18 +67,13 @@ body {
   left: 10vw;
 }
 
-.gameNum5,
-.gameNum6 {
-  position: absolute;
-  left: 15vw;
-}
 .gameNum7,
 .gameNum8 {
   position: absolute;
   left: 30vw;
 }
-.gameNum9,
-.gameNum10 {
+.gameNum5,
+.gameNum6 {
   position: absolute;
   left: 30vw;
 }
@@ -101,24 +96,22 @@ body {
 .gameNum8 {
   top: 42.5vh;
 }
-.gameNum5,
-.gameNum9 {
+.gameNum5 {
   top: 62.5vh;
 }
-.gameNum6,
-.gameNum10 {
+.gameNum6 {
   top: 77.5vh;
 }
-.gameNum12,
-.gameNum11 {
+.gameNum10,
+.gameNum9 {
   position: absolute;
   left: 45vw;
   top: 70vh;
 }
-.gameNum11 {
+.gameNum9 {
   top: 30.5vh;
 }
-.gameNum13 {
+.gameNum11 {
   position: absolute;
   left: 59vw;
   top: 60.25vh;

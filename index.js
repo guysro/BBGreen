@@ -22,11 +22,11 @@ const calculateBracket = (games) => {
   games[7].red = games[2].winner;
   games[7].blue = games[3].winner;
   //game 11:
-  games[10].red = games[6].winner;
-  games[10].blue = games[7].winner;
+  games[10].red = games[8].loser;
+  games[10].blue = games[9].winner;
   //finale:
-  games[13].red = games[10].winner;
-  games[13].blue = games[12].winner;
+  games[11].red = games[10].winner;
+  games[11].blue = games[8].winner;
 
   //loser bracket
   //game 5:
@@ -36,21 +36,15 @@ const calculateBracket = (games) => {
   games[5].red = games[2].loser;
   games[5].blue = games[3].loser;
   //game 9:
-  games[8].red = games[4].winner;
-  games[8].blue = games[7].loser;
+  games[8].red = games[6].winner;
+  games[8].blue = games[7].winner;
   //game 10:
-  games[9].red = games[5].winner;
-  games[9].blue = games[6].loser;
-  //game 12:
-  games[11].red = games[8].winner;
-  games[11].blue = games[9].winner;
-  //game 13:
-  games[12].red = games[11].winner;
-  games[12].blue = games[10].loser;
+  games[9].red = games[4].winner;
+  games[9].blue = games[5].winner;
 };
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join("C:/Users/guyku/Desktop/BBGreen/matchPov.html"));
+  res.sendFile(path.join("C:/Users/guyku/frc/BBGreen/matchPov.html"));
 });
 
 app.get("/getInMatch", (req, res) => {
@@ -63,15 +57,15 @@ app.get("/stopMatch", (req, res) => {
   res.send();
 });
 app.get("/noMatch", (req, res) => {
-  res.sendFile(path.join("C:/Users/guyku/Desktop/BBGreen/noMatch.html"));
+  res.sendFile(path.join("C:/Users/guyku/frc/BBGreen/noMatch.html"));
 });
 
 app.get("/admin", (req, res) => {
-  res.sendFile(path.join("C:/Users/guyku/Desktop/BBGreen/admin.html"));
+  res.sendFile(path.join("C:/Users/guyku/frc/BBGreen/admin.html"));
 });
 
 app.get("/leaderboard", (req, res) => {
-  const file = fs.readFileSync("C:/Users/guyku/Desktop/BBGreen/leaderboard.json");
+  const file = fs.readFileSync("C:/Users/guyku/frc/BBGreen/leaderboard.json");
   const data = JSON.parse(file);
 
   res.send(`<p>${JSON.stringify(data)}</p>`);
@@ -121,7 +115,7 @@ app.get("/runBanner", (req, res) => {
 });
 
 app.post("/addGame", (req, res) => {
-  const file = fs.readFileSync("C:/Users/guyku/Desktop/BBGreen/leaderboard.json");
+  const file = fs.readFileSync("C:/Users/guyku/frc/BBGreen/leaderboard.json");
   const data = JSON.parse(file);
   console.log("before", JSON.stringify(data));
   const compArr = data.competitors;
@@ -150,24 +144,24 @@ app.post("/addGame", (req, res) => {
   orderedData.competitors = compArr.sort((a, b) => {
     a.won > b.won;
   });
-  fs.writeFileSync("C:/Users/guyku/Desktop/BBGreen/leaderboard.json", JSON.stringify(data), "utf-8", (err) => {
+  fs.writeFileSync("C:/Users/guyku/frc/BBGreen/leaderboard.json", JSON.stringify(data), "utf-8", (err) => {
     if (err) throw err;
     console.log("added game to file");
   });
   console.log("ordered", JSON.stringify(orderedData));
-  const updated = fs.readFileSync("C:/Users/guyku/Desktop/BBGreen/leaderboard.json");
+  const updated = fs.readFileSync("C:/Users/guyku/frc/BBGreen/leaderboard.json");
   const updatedData = JSON.parse(updated);
   res.json(updatedData);
 });
 
 app.get("/gameList", (req, res) => {
-  const games = fs.readFileSync("C:/Users/guyku/Desktop/BBGreen/games.json");
+  const games = fs.readFileSync("C:/Users/guyku/frc/BBGreen/games.json");
   const gamesJson = JSON.parse(games);
   res.json(gamesJson);
 });
 
 app.post("/submitGame", (req, res) => {
-  const gamesFile = fs.readFileSync("C:/Users/guyku/Desktop/BBGreen/games.json");
+  const gamesFile = fs.readFileSync("C:/Users/guyku/frc/BBGreen/games.json");
   const games = JSON.parse(gamesFile);
   let updated = games;
   updated.forEach((game) => {
@@ -185,7 +179,7 @@ app.post("/submitGame", (req, res) => {
   });
   calculateBracket(updated);
   console.log(updated);
-  fs.writeFileSync("C:/Users/guyku/Desktop/BBGreen/games.json", JSON.stringify(updated), "utf-8", (err) => {
+  fs.writeFileSync("C:/Users/guyku/frc/BBGreen/games.json", JSON.stringify(updated), "utf-8", (err) => {
     if (err) throw err;
     console.log("added game to file");
   });
@@ -193,40 +187,51 @@ app.post("/submitGame", (req, res) => {
 });
 
 app.get("/style", (req, res) => {
-  res.sendFile(path.join("C:/Users/guyku/Desktop/BBGreen/style.css"));
+  res.sendFile(path.join("C:/Users/guyku/frc/BBGreen/style.css"));
 });
 
 app.get("/noMatchStyle", (req, res) => {
-  res.sendFile(path.join("C:/Users/guyku/Desktop/BBGreen/noMatchStyle.css"));
+  res.sendFile(path.join("C:/Users/guyku/frc/BBGreen/noMatchStyle.css"));
 });
 
 app.get("/getGames", (req, res) => {
   var htmlTxt = [""];
-  const gamesFile = fs.readFileSync("C:/Users/guyku/Desktop/BBGreen/games.json");
+  const gamesFile = fs.readFileSync("C:/Users/guyku/frc/BBGreen/games.json");
   const games = JSON.parse(gamesFile);
   gameList = games;
+  calculateBracket(gameList);
   games.forEach((game) => {
     let bodyReq = {
       "number": game.number,
       "red": game.red,
       "blue": game.blue,
-      "winner": game.winner
+      "winner": game.winner,
+      "loser": game.loser
     };
-    htmlTxt.push(`
+    if (bodyReq.winner != "" && bodyReq.loser == "")
+      htmlTxt.push(`
       <div class="gameCont gameNum${bodyReq.number}">
-        <header class="gameNum">${bodyReq.number}</header>
-        <div class="teams">
-          <header class="gameRed">${bodyReq.red}</header>
-          <header class="gameBlue">${bodyReq.blue}</header>
+          <header class="gameNum">${bodyReq.number}</header>
+          <header class="gameBlue">${bodyReq.winner}</header>
+        </div>
+      </div>
+    `);
+    else
+      htmlTxt.push(`
+        <div class="gameCont gameNum${bodyReq.number}">
+          <header class="gameNum">${bodyReq.number}</header>
+          <div class="teams">
+            <header class="gameRed">${bodyReq.red}</header>
+            <header class="gameBlue">${bodyReq.blue}</header>
           </div>
-          </div>
-          `);
+        </div>
+      `);
   });
   res.send(htmlTxt);
 });
 
 app.get("/timerBanner", (req, res) => {
-  res.sendFile(path.join("C:/Users/guyku/Desktop/BBGreen/banner.jpg"));
+  res.sendFile(path.join("C:/Users/guyku/frc/BBGreen/banner.jpg"));
 });
 
 app.listen(port, () => {
