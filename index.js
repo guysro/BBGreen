@@ -14,41 +14,28 @@ let gameList = [];
 let currentGame = {};
 
 const calculateBracket = (games) => {
-  //winner bracket
   //game 7:
-  games[6].red = games[0].winner;
-  games[6].blue = games[1].winner;
-  //game 8:
-  games[7].red = games[2].winner;
-  games[7].blue = games[3].winner;
-  //game 11:
-  games[10].red = games[8].loser;
-  games[10].blue = games[9].winner;
+  games[6].red = games[5].winner;
+  games[6].blue = games[4].loser;
   //finale:
-  games[11].red = games[10].winner;
-  games[11].blue = games[8].winner;
-
-  //loser bracket
+  games[7].red = games[4].winner;
+  games[7].blue = games[6].winner;
   //game 5:
-  games[4].red = games[0].loser;
-  games[4].blue = games[1].loser;
+  games[4].red = games[1].winner;
+  games[4].blue = games[2].winner;
   //game 6:
-  games[5].red = games[2].loser;
-  games[5].blue = games[3].loser;
-  //game 9:
-  games[8].red = games[6].winner;
-  games[8].blue = games[7].winner;
-  //game 10:
-  games[9].red = games[4].winner;
-  games[9].blue = games[5].winner;
+  games[5].red = games[3].winner;
+  games[5].blue = games[2].loser;
+  // game 4:
+  games[3].red = games[0].loser;
+  games[3].blue = games[1].loser;
+
+  //game 3
+  games[2].red = games[0].winner;
 };
 
-app.get("/", (req, res) => {
+app.get("/match", (req, res) => {
   res.sendFile(path.join("C:/Users/guyku/frc/BBGreen/matchPov.html"));
-});
-
-app.get("/getInMatch", (req, res) => {
-  res.send(inMatchView);
 });
 
 app.get("/stopMatch", (req, res) => {
@@ -184,6 +171,29 @@ app.post("/submitGame", (req, res) => {
     console.log("added game to file");
   });
   res.json(updated);
+});
+
+app.get("/resetGames", (req, res) => {
+  const gamesFile = fs.readFileSync("C:/Users/guyku/frc/BBGreen/games.json");
+  const games = JSON.parse(gamesFile);
+  let updated = games;
+  updated.forEach((game) => {
+    if (game.number > 3 || game.number == "F") {
+      game.red = "";
+      game.blue = "";
+      game.winner = "";
+      game.loser = "";
+    } else if (game.number <= 3) {
+      game.winner = "";
+      game.loser = "";
+    }
+  });
+
+  fs.writeFileSync("C:/Users/guyku/frc/BBGreen/games.json", JSON.stringify(updated), "utf-8", (err) => {
+    if (err) throw err;
+    console.log("added game to file");
+  });
+  res.send();
 });
 
 app.get("/style", (req, res) => {

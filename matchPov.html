@@ -17,21 +17,10 @@
     />
   </head>
   <body>
-    <video
-      id="webcam"
-      autoplay
-      playsinline
-      class="video"
-    ></video>
-    <canvas id="canvas"></canvas>
     <div id="timer"></div>
     <script>
       const timer = document.querySelector("#timer");
       timer.style.backgroundImage = "url('timerBanner')";
-      const camElm = document.querySelector("#webcam");
-      const canvasElm = document.querySelector("#canvas");
-      const camera = new Webcam(camElm, "stream", canvasElm);
-      camera.start();
       let games = [];
 
       const activateTimer = () => {
@@ -55,13 +44,6 @@
       }, 1000);
       setInterval(() => {
         fetch("getGames");
-        fetch("getInMatch")
-          .then((res) => res.text())
-          .then((res) => {
-            if (res == "false") {
-              window.location.replace("/noMatch");
-            }
-          });
       }, 1000);
     </script>
   </body>

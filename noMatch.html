@@ -17,25 +17,20 @@
     />
   </head>
   <body>
-    <div class="connectFirst l1">
-      <div class="line l21"></div>
-      <div class="vline l22"></div>
-      <div class="line l23"></div>
-    </div>
     <div class="connectFirst l2">
       <div class="line l21"></div>
       <div class="vline l22"></div>
-      <div class="line l23"></div>
+      <div class="line l13"></div>
     </div>
     <div class="connectSec l5">
       <div class="line l21"></div>
       <div class="vline l22"></div>
       <div class="line l23"></div>
     </div>
-    <div class="connectSec l6">
+    <div class="connectFirst l6">
       <div class="line l21"></div>
       <div class="vline l22"></div>
-      <div class="line l23"></div>
+      <div class="line l13"></div>
     </div>
     <div class="connectThird">
       <div class="line l31"></div>
@@ -67,16 +62,6 @@
       setInterval(async () => {
         await checkGames();
       }, 5000);
-
-      setInterval(() => {
-        fetch("getInMatch")
-          .then((res) => res.text())
-          .then((res) => {
-            if (res == "true") {
-              window.location.replace("/");
-            }
-          });
-      }, 1000);
     </script>
   </body>
 </html>

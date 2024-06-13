@@ -27,11 +27,27 @@
         name="gameNum"
         id="gameToStart"
       />
-      <button onclick="startGame()">start game</button>
+      <button
+        id="start"
+        onclick="startGame()"
+      >
+        start game
+      </button>
     </div>
     <button onclick="startTime()">start timer</button>
-    <button onclick="endGame()">end game</button>
-    <button onclick="resetTime()">reset timer</button>
+    <button onclick="resetGames()">reset games</button>
+    <button
+      id="end"
+      onclick="endGame()"
+    >
+      end game
+    </button>
+    <button
+      id="reset"
+      onclick="resetTime()"
+    >
+      reset timer
+    </button>
     <div
       id="gameCont"
       class="gameSubCont"
@@ -72,10 +88,16 @@
       const resetTime = () => {
         fetch("resetTimer");
       };
+
+      const resetGames = () => {
+        fetch("resetGames");
+      };
+
       const endGame = async () => {
         resetTime();
         fetch("stopMatch");
       };
+
       const gameToStartInput = document.querySelector("#gameToStart");
       const startGame = () => {
         if (gameToStartInput.value == "") {
@@ -93,6 +115,18 @@
           body: JSON.stringify(bodyReq)
         });
       };
+
+      const startElm = document.querySelector("#start");
+      const endElm = document.querySelector("#end");
+      const resetElm = document.querySelector("#reset");
+      document.addEventListener("keypress", (e) => {
+        console.log(e);
+        if (e.keyCode == 68 && e.shiftKey) startElm.click();
+        if (e.keyCode == 83 && e.shiftKey) {
+          endElm.click();
+          resetElm.click();
+        }
+      });
       const startTime = () => {
         fetch("startTimer");
       };

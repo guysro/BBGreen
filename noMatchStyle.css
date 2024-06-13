@@ -1,7 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+* {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 ::-webkit-scrollbar {
   display: none;
 }
-
 .gameCont {
   display: flex;
   width: 12vw;
@@ -40,7 +46,7 @@
 .gameWinner {
   width: 100%;
   height: 3vh;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   display: flex;
   align-items: center;
   text-indent: 1vw;
@@ -59,59 +65,44 @@ body {
   position: absolute;
   top: 0;
 }
-.gameNum1,
-.gameNum2,
-.gameNum3,
-.gameNum4 {
+
+.gameNum1 {
   position: absolute;
   left: 10vw;
 }
 
-.gameNum7,
-.gameNum8 {
+.gameNum3,
+.gameNum2 {
   position: absolute;
   left: 30vw;
 }
-.gameNum5,
-.gameNum6 {
+.gameNum4 {
   position: absolute;
   left: 30vw;
 }
 
 .gameNum1 {
-  top: 12.5vh;
-}
-.gameNum2 {
-  top: 22.5vh;
-}
-.gameNum3 {
   top: 36.5vh;
 }
-.gameNum4 {
-  top: 48.5vh;
-}
-.gameNum7 {
+.gameNum2 {
   top: 18.5vh;
 }
-.gameNum8 {
+.gameNum3 {
   top: 42.5vh;
 }
-.gameNum5 {
+.gameNum4 {
   top: 62.5vh;
 }
+.gameNum5,
 .gameNum6 {
-  top: 77.5vh;
-}
-.gameNum10,
-.gameNum9 {
   position: absolute;
   left: 45vw;
   top: 70vh;
 }
-.gameNum9 {
+.gameNum5 {
   top: 30.5vh;
 }
-.gameNum11 {
+.gameNum7 {
   position: absolute;
   left: 59vw;
   top: 60.25vh;
@@ -134,29 +125,16 @@ body {
   position: absolute;
   left: 23vw;
   width: 6vw;
-  height: 12.2vh;
+  height: 6vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
   top: 34vh;
 }
-.connectFirst::after {
-  content: " ";
-  width: 50%;
-  height: 3px;
-  background-color: black;
-  position: absolute;
-  right: 0px;
-}
-
-.l1 {
-  top: 16vh;
-}
 
 .l2 {
   top: 40vh;
 }
-
 .l3,
 .l4 {
   width: 2vw;
@@ -193,19 +171,14 @@ body {
 .l22 {
   align-self: center;
 }
-.l6::after {
-  content: " ";
-  width: 50%;
-  height: 3px;
-  background-color: black;
-  position: absolute;
-  right: 0px;
+.l13 {
+  align-self: flex-end;
 }
 .l6 {
   left: 42.5vw;
   top: 66vh;
   width: 2vw;
-  height: 15.25vh;
+  height: 7.75vh;
 }
 .connectThird {
   position: absolute;
